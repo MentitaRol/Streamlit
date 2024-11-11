@@ -26,3 +26,16 @@ police_district_input = st.sidebar.multiselect(
 mapa.groupby('Police District').count().reset_index()['Police District'].tolist())
 if len(police_district_input) > 0:
     subset_data2 = mapa[mapa['Police District'].isin(police_district_input)]
+
+subset_data = subset_data2   
+    
+st.markdown('It is important to mention that any police district can answer to any incident, the neighborhood in which it happened is not related to the police district.')    
+st.markdown('Crime locations in San Francisco')
+st.map(subset_data)
+st.markdown('Crimes ocurred per day of the week')
+st.bar_chart(subset_data['Day'].value_counts())
+st.markdown('Crimes ocurred per date')
+st.line_chart(subset_data['Date'].value_counts())
+st.markdown('Type of crimes committed')
+st.bar_chart(subset_data['Incident Category'].value_counts())
+
